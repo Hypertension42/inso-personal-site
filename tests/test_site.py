@@ -37,6 +37,14 @@ class SiteTests(unittest.TestCase):
         for a in self.page.links:
             if a.get('target') == '_blank':
                 self.assertIn('noopener', a.get('rel', ''))
+    def test_identity_is_personal_not_a_cooperation_title(self):
+        html = (ROOT / 'index.html').read_text()
+        hero = html.split('<section class="hero"', 1)[1].split('</section>', 1)[0]
+        self.assertIn('陈振邦', hero)
+        self.assertIn('AI Agent 与应用开发', hero)
+        self.assertNotIn('纵横家', hero)
+        self.assertNotIn('STRATEGIST', html)
+        self.assertIn('“纵横家”是我给自己的一个提醒', html)
     def test_static_resources_are_self_contained(self):
         self.assertFalse([r for r in self.page.resources if r])
         self.assertTrue((ROOT / '.nojekyll').is_file())

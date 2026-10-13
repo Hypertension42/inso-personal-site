@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#fffefc">
   <meta name="description" content="陈振邦 / 因索 Inso。AI Agent 与 LLM 应用开发：工作流编排、文档审查、评测与全栈交付。项目记录与合作入口。">
-  <meta property="og:title" content="INSOMNIA — STRATEGIST / 纵横家">
+  <meta property="og:title" content="陈振邦 / 因索 — AI Agent 与应用开发">
   <meta property="og:description" content="陈振邦 / 因索的工程实践：AI 投标合规审查、Key Bank、PoseCare 与 T2 Education。">
   <meta property="og:type" content="website">
   <title>INSOMNIA — 陈振邦 / AI Agent 与工程实践</title>
@@ -518,6 +518,10 @@ a.project-source:hover{color:var(--ink)}
 @media(max-width:520px){.hero h1{font-size:66px}.hero-en{font-size:27px;letter-spacing:.08em;margin-bottom:12px}.hero-role{font-size:10px;letter-spacing:.02em}.hero-copy .lead{font-size:15px;line-height:1.85;margin-bottom:16px}.hero-proof{margin-bottom:19px;gap:5px}.hero-proof span{font-size:11px;padding:3px 8px}.hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.hero-actions .btn{font-size:13px;padding:11px 12px;gap:10px;min-height:46px}.hero-note{font-size:10px;gap:9px}.hero-note i{width:20px}.dossier-feature{padding:21px}.dossier-feature strong{font-size:34px;margin:12px 0}.dossier-grid strong{font-size:18px}.dossier-grid span{font-size:9px}.dossier-heading{font-size:10px}.case h3{font-size:23px}.case p{font-size:14px}.case-top{align-items:start}.case-num{font-size:10px;line-height:1.8}.case-type{font-size:10px}.case-tags{gap:5px}.tag{font-size:9px;padding:5px 7px}.casefile-stats strong{font-size:30px}.casefile-stats span{font-size:10px}.delivery-flow{padding:21px}.delivery-flow li{font-size:13px}.console-main h3{font-size:27px}.contact-email{font-size:20px;gap:12px}.contact-links a,.contact-links button{min-height:44px;font-size:12px;padding:11px 13px}.opportunity-copy h3{font-size:22px}.footer-inner{font-size:10px}.command-item .command-item-hint{display:none}}
 @media(max-width:360px){.hero h1{font-size:60px}.hero-role{font-size:9px}.hero-proof span{font-size:10px;padding:3px 6px}.contact-email{font-size:18px}.hero-note{font-size:9px}}
 
+/* A direct introduction for collaborators; personality lives in the about section. */
+.hero .hero-role{font:500 23px/1.6 var(--font-mixed);letter-spacing:.02em;color:var(--accent-bright);margin:0 0 16px}
+.about-copy .personal-note{font-size:13px;color:var(--muted);border-left:2px solid var(--hair-strong);padding-left:14px;margin-top:23px}
+@media(max-width:520px){.hero .hero-role{font-size:20px;margin-bottom:14px}}
   </style>
 </head>
 <body>
@@ -525,8 +529,8 @@ a.project-source:hover{color:var(--ink)}
 <header class="header">
   <div class="wrap nav-row">
     <a class="brand" href="#top" aria-label="因索首页">
-      <span class="brand-glyph" aria-hidden="true">纵</span>
-      <span><span class="brand-en">INSOMNIA</span><span class="brand-sub">因索 / STRATEGIST</span></span>
+      <span class="brand-glyph" aria-hidden="true">因</span>
+      <span><span class="brand-en">INSOMNIA</span><span class="brand-sub">陈振邦 / 因索</span></span>
     </a>
     <nav id="main-nav" class="site-nav" aria-label="主导航">
       <a href="#moves">项目 / WORK</a><a href="#case-study">实习 / CASE FILE</a><a href="#desk">判断 / NOTES</a><a href="#about">关于 / ABOUT</a>
@@ -540,10 +544,10 @@ a.project-source:hover{color:var(--ink)}
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
         <div class="eyebrow">CHEN ZHENBANG / INSO</div>
-        <h1 id="hero-title">纵横家<span>。</span></h1>
-        <div class="hero-en">STRATEGIST<span class="cursor-blink">_</span></div>
-        <p class="hero-role">AI AGENT / LLM APPLICATION ENGINEERING</p>
-        <p class="lead">我是<strong>陈振邦 / 因索</strong>，能源与动力工程本科在读。<br>从真实业务问题出发，做 Agent、搭评测，把方案推进到<strong>可检验的交付</strong>。</p>
+        <h1 id="hero-title">陈振邦<span>。</span></h1>
+        <div class="hero-en">INSO<span class="cursor-blink">_</span></div>
+        <p class="hero-role">AI Agent 与应用开发</p>
+        <p class="lead">也叫<strong>因索 / Inso</strong>，能源与动力工程本科在读。<br>我做 Agent、文档处理和全栈应用，关心怎样把技术用到<strong>具体问题</strong>里。</p>
         <div class="hero-proof"><span>真实业务实习</span><span>全栈项目交付</span><span>黑客松获奖</span></div>
         <div class="hero-actions"><a class="btn primary" href="#moves">查看项目 <span>↗</span></a><a class="btn" href="mailto:fxcasio998@gmail.com">发邮件聊聊 <span>→</span></a></div>
         <div class="hero-note mono"><span>HEFEI · CHINA</span><i></i><span>BUILD. MEASURE. LEARN.</span></div>
@@ -585,13 +589,13 @@ a.project-source:hover{color:var(--ink)}
     <div class="console-main" id="scenario-panel" role="tabpanel" aria-labelledby="tab-business" tabindex="0"><div class="console-grid" aria-hidden="true"></div><div class="console-label"><span class="console-live"></span><span id="scenario-kicker">01 — MEASURE THE ERROR</span><span class="console-count" id="scenario-count">01 / 03</span></div><h3 id="scenario-title">模型有没有变好，<br><em>让评测来回答。</em></h3><p id="scenario-intro">投标审查中，模型跨行抓值会漏掉缺席字段。我先建立固定样本与黄金答案，再围绕错误类型修改处理流程。</p><div class="analysis-trail" id="analysis-trail"><div class="trail-step"><span>01 · 定基线</span><p>固定 seed 与 628 条规则测试样本。</p></div><div class="trail-step"><span>02 · 找错误</span><p>定位跨行抓值，加入摘录切分与守卫。</p></div><div class="trail-step"><span>03 · 测变化</span><p>缺席字段检出准确率从 24% 到 50%。</p></div></div><div class="console-bottom"><span>PROJECT NOTES / 来自已完成的工作</span><button type="button" id="scenario-next" aria-label="查看下一则工程笔记">NEXT NOTE <b>↗</b></button></div></div></div>
   </div></section>
   <section class="section about" id="about" aria-labelledby="about-title"><div class="wrap about-grid">
-    <div class="about-copy reveal"><div class="section-label">04 / PERSON & TOOLKIT</div><h2 id="about-title" class="editorial-title is-compact"><span class="line">从工程专业，</span><span class="line"><span class="highlight">走进 AI 工程</span><span class="tail">。</span></span></h2><p>我是陈振邦，也叫因索 / Insomnia。2024 年进入安徽建筑大学环境与能源工程学院，学习能源与动力工程，预计 2028 年毕业。</p><p>自学数据结构、计算机网络、操作系统、数据库与软件工程；通过实习、独立项目与黑客松，把这些知识放到真实问题里。</p><p><strong>我关注 Agent 工作流、工具调用、评测体系与 RAG。</strong>也在持续补需求访谈、表达和团队组织，练习把技术与人连接起来。</p><a class="about-github" href="https://github.com/Hypertension42" target="_blank" rel="noopener noreferrer">看看我的 GitHub / Hypertension42 ↗</a></div>
+    <div class="about-copy reveal"><div class="section-label">04 / PERSON & TOOLKIT</div><h2 id="about-title" class="editorial-title is-compact"><span class="line">从工程专业，</span><span class="line"><span class="highlight">走进 AI 工程</span><span class="tail">。</span></span></h2><p>我是陈振邦，也叫因索 / Insomnia。2024 年进入安徽建筑大学环境与能源工程学院，学习能源与动力工程，预计 2028 年毕业。</p><p>自学数据结构、计算机网络、操作系统、数据库与软件工程；通过实习、独立项目与黑客松，把这些知识放到真实问题里。</p><p><strong>我关注 Agent 工作流、工具调用、评测体系与 RAG。</strong>也在持续补需求访谈、表达和团队组织，练习把技术与人连接起来。</p><p class="personal-note">“纵横家”是我给自己的一个提醒：看清局面，找到合适的人，把事情推进下去。</p><a class="about-github" href="https://github.com/Hypertension42" target="_blank" rel="noopener noreferrer">看看我的 GitHub / Hypertension42 ↗</a></div>
     <div class="principle-list reveal" aria-label="技术能力"><div class="principle"><span class="rule-mark">01 /</span><div><h3>Agent 与文档工程</h3><p>LangGraph · DeepSeek · FastAPI<br>多引擎 OCR · MediaPipe · SiliconFlow</p></div></div><div class="principle"><span class="rule-mark">02 /</span><div><h3>全栈开发</h3><p>Python · TypeScript · C<br>Vue 3 · NestJS · Express · PostgreSQL</p></div></div><div class="principle"><span class="rule-mark">03 /</span><div><h3>部署与开发工具</h3><p>Docker · Git · Linux · CI/CD<br>Claude Code 与多智能体协作</p></div></div><div class="principle"><span class="rule-mark">04 /</span><div><h3>英文技术阅读</h3><p>CET-4 · 可阅读英文技术文档</p></div></div></div>
   </div></section>
   <section class="section opportunities" id="now" aria-labelledby="now-title"><div class="wrap opportunity-grid"><div class="reveal"><div class="section-label">05 / NEXT CHAPTER</div><h2 class="section-title editorial-title is-compact" id="now-title"><span class="line">下一步，</span><span class="line"><span class="highlight">深入应用现场</span><span class="tail">。</span></span></h2></div><div class="opportunity-copy reveal"><span class="focus-meta">2027 SUMMER / INTERNSHIP</span><h3>AI Agent / LLM 应用开发实习</h3><p>希望参与 Agent 产品与基础设施研发，在真实团队里继续积累工程与行业经验。意向城市：上海、杭州、北京。</p><div class="opportunity-tags"><span>工作流与工具调用</span><span>评测与质量工程</span><span>垂直行业应用</span></div><p class="ongoing-note">个人实验：基于 Pi × DeepSeek 的连续执行 Agent，继续探索目标追踪与长任务循环。</p><a class="focus-link" href="mailto:fxcasio998@gmail.com?subject=AI%20Agent%20%E5%AE%9E%E4%B9%A0%E4%BA%A4%E6%B5%81">交流实习机会 ↗</a></div></div></section>
-  <section class="contact" id="contact" aria-labelledby="contact-title"><div class="wrap"><div class="contact-panel reveal"><div class="section-label">06 / LET’S BUILD</div><h2 id="contact-title" class="editorial-title is-compact"><span class="line">带着一个问题，</span><span class="line"><span class="highlight">一起推进一步</span><span class="tail">。</span></span></h2><p>有 Agent 应用、文档审查或全栈原型需要一起做？也欢迎交流实习机会与黑客松协作。邮件里告诉我你的场景、当前卡点和希望交付的结果。</p><a class="contact-email" href="mailto:fxcasio998@gmail.com">fxcasio998@gmail.com <span>↗</span></a><div class="contact-links"><a class="contact-primary" id="email-button" href="mailto:fxcasio998@gmail.com">写邮件 ↗</a><button type="button" id="copy-email">复制邮箱</button><a href="https://github.com/Hypertension42" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><button type="button" id="share-button">分享网站 ↗</button></div></div></div></section>
+  <section class="contact" id="contact" aria-labelledby="contact-title"><div class="wrap"><div class="contact-panel reveal"><div class="section-label">06 / LET’S BUILD</div><h2 id="contact-title" class="editorial-title is-compact"><span class="line">带着一个问题，</span><span class="line"><span class="highlight">一起推进一步</span><span class="tail">。</span></span></h2><p>如果你在做 Agent 应用、文档处理或全栈项目，欢迎一起交流。也可以聊实习机会或组队参加黑客松。发邮件简单说说你在做什么、需要哪方面的帮助就好。</p><a class="contact-email" href="mailto:fxcasio998@gmail.com">fxcasio998@gmail.com <span>↗</span></a><div class="contact-links"><a class="contact-primary" id="email-button" href="mailto:fxcasio998@gmail.com">写邮件 ↗</a><button type="button" id="copy-email">复制邮箱</button><a href="https://github.com/Hypertension42" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><button type="button" id="share-button">分享网站 ↗</button></div></div></div></section>
 </main>
-<footer class="footer"><div class="wrap footer-inner"><span>© <span id="year">2026</span> INSOMNIA / INSO — 纵横家.</span><span>READ THE FIELD. SHAPE THE GAME.</span><button type="button" id="back-to-top">↑ TOP</button></div></footer>
+<footer class="footer"><div class="wrap footer-inner"><span>© <span id="year">2026</span> 陈振邦 / INSO.</span><span>READ THE FIELD. SHAPE THE GAME.</span><button type="button" id="back-to-top">↑ TOP</button></div></footer>
 <dialog id="case-modal" aria-labelledby="modal-title"><div class="modal-inner"><div class="modal-head"><span id="modal-kicker">FIELD NOTES / DETAIL</span><button type="button" id="modal-close" class="modal-close" aria-label="关闭弹窗">×</button></div><h2 id="modal-title"></h2><p id="modal-description"></p><ul id="modal-points"></ul><a class="modal-source" id="modal-source" hidden target="_blank" rel="noopener noreferrer">查看项目仓库 ↗</a></div></dialog>
 <dialog class="command-dialog" id="command-dialog" aria-labelledby="command-label"><div class="command-inner">
 <div class="command-input-wrap"><span>↗</span><label id="command-label" for="command-input" class="sr-only">快速搜索章节和项目</label><input type="search" id="command-input" placeholder="搜索章节、项目 / SEARCH…" autocomplete="off" spellcheck="false"><button type="button" id="command-close" aria-label="关闭快捷导航">ESC</button></div>
@@ -702,7 +706,7 @@ a.project-source:hover{color:var(--ink)}
     try{await navigator.clipboard.writeText('fxcasio998@gmail.com');notify('邮箱已复制');}
     catch(_){notify('请选中上方邮箱复制：fxcasio998@gmail.com');}
   });
-  $('#share-button').addEventListener('click',async()=>{const url=location.href.split('#')[0];if(!/^https?:/.test(url)){notify('部署到线上后，可一键分享网站链接');return;}if(navigator.share){try{await navigator.share({title:'INSOMNIA — STRATEGIST',text:'因索 / 纵横家',url});return;}catch(err){if(err.name==='AbortError')return;}}if(navigator.clipboard){try{await navigator.clipboard.writeText(url);notify('链接已复制');return;}catch(err){}}notify('请从地址栏复制链接');});
+  $('#share-button').addEventListener('click',async()=>{const url=location.href.split('#')[0];if(!/^https?:/.test(url)){notify('部署到线上后，可一键分享网站链接');return;}if(navigator.share){try{await navigator.share({title:'陈振邦 / 因索 — AI Agent 与应用开发',text:'项目、工程实践与合作交流',url});return;}catch(err){if(err.name==='AbortError')return;}}if(navigator.clipboard){try{await navigator.clipboard.writeText(url);notify('链接已复制');return;}catch(err){}}notify('请从地址栏复制链接');});
   $('#back-to-top').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
   $('#year').textContent=String(new Date().getFullYear());
   const reveals=$$('.reveal');
