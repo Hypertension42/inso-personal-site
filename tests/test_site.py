@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,7 +50,7 @@ class SiteTests(unittest.TestCase):
         for resource in self.page.resources:
             if resource:
                 self.assertFalse(resource.startswith(('http:', 'https:', '//')))
-                self.assertTrue((ROOT / resource).is_file(), resource)
+                self.assertTrue((ROOT / urlsplit(resource).path).is_file(), resource)
         self.assertTrue((ROOT / '.nojekyll').is_file())
         self.assertFalse((ROOT / 'assets/vendor').exists(), 'No 3D dependencies')
     def test_motion_controls_and_accessible_title(self):
