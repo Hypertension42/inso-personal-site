@@ -30,8 +30,9 @@
   let userEnabled = true;
   let enabled = false;
   let initialized = false;
+  let firstEnable = true;
   let heroVisible = false;
-  let introPending = true;
+  let introPending = page.dataset.entryOpened !== 'skip';
   let width = 0;
   let height = 0;
   let stageBounds;
@@ -46,7 +47,7 @@
   let contactFocused = false;
 
   const clamp = (number, low, high) => Math.min(high, Math.max(low, number));
-  const activePage = () => enabled && !document.hidden;
+  const activePage = () => enabled && !document.hidden && !page.classList.contains('entry-active') && !page.classList.contains('entry-pending');
   const heroRunning = () => activePage() && heroVisible;
 
   function releasePointer() {
@@ -244,7 +245,10 @@
         binary.element.textContent = binary.original;
         binary.characters = [...binary.original];
       }
-    } else if (becameEnabled) introPending = true;
+    } else if (becameEnabled) {
+      introPending = !(firstEnable && page.dataset.entryOpened === 'skip');
+      firstEnable = false;
+    }
     syncActivity();
   }
 
@@ -385,6 +389,10 @@
   for (const name of ['pointerleave', 'pointercancel', 'pointerup']) contactArrow?.addEventListener(name, () => { contactHovered = false; syncContact(); });
   contactArrow?.addEventListener('focus', () => { contactFocused = true; syncContact(); });
   contactArrow?.addEventListener('blur', () => { contactFocused = false; syncContact(); });
+  document.addEventListener('inso:entry-open', event => {
+    introPending = !event.detail?.skip;
+    syncActivity();
+  });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { releasePointer(); contactHovered = contactFocused = false; }
     syncActivity();

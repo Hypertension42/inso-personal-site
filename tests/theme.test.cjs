@@ -6,7 +6,7 @@ const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const initialTheme = html.match(/<html[^>]*data-theme="([^"]+)"/)[1];
 const bootstrap = html.match(/<script>([\s\S]*?)<\/script>/)[1];
 function boot(saved, blocked = false) {
-  const document = { documentElement: { dataset: { theme: initialTheme } } };
+  const document = { documentElement: { dataset: { theme: initialTheme }, classList: { add() {} } } };
   vm.runInNewContext(bootstrap, {document, localStorage: {getItem() {if(blocked) throw new Error('blocked'); return saved;}}});
   return document.documentElement.dataset.theme;
 }

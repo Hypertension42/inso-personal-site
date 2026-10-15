@@ -11,6 +11,7 @@
 - `index.html`：静态项目、个人介绍、详细记录。无 JavaScript 也可以阅读核心内容。
 - `assets/site.css`：排版、暗紫/浅紫主题、响应式与 reduced-motion。
 - `assets/app.js`：项目切换、键盘导航、详情弹窗、主题和复制邮箱。
+- `assets/entry.js`：纯色入口、四块门板向四角打开，再衔接首屏入场。支持跳过、Escape、键盘操作和减少动态效果；无 JavaScript 时直接展示内容。
 - `assets/motion.js`：原生 SVG/WAAPI 动效，含指针弹性线场、字形滚轮、二进制带、滚动显现和联系涟漪。支持暂停、重播和系统减少动态偏好；离屏/后台停止持续更新。
 - `assets/signal.svg`：独立绘制的生成式线稿，不含外部素材。
 - `assets/content.mjs`：本轮整理的事实资料参考；发布页面以 `index.html` 为准，编辑内容时同步维护。
@@ -23,6 +24,8 @@ node tests/theme.test.cjs
 ```
 
 使用 ego-browser 时，先创建一个任务空间，再运行 `python3 tests/run_browser.py --space <spaceId>`；动效专项运行 `python3 tests/run_browser.py --space <spaceId> --suite motion-browser`。
+
+入口专项运行 `python3 tests/run_browser.py --space <spaceId> --suite entry-browser`，检查对称开门、重复点击、焦点、跳过、深链接、移动端和减少动态效果。
 
 浏览器检查：五个项目切换，方向键/Home/End，详情关闭与焦点恢复，邮箱复制，主题记忆，390/768/1440px 布局，reduced-motion。
 

@@ -10,16 +10,26 @@
 <meta property="og:type" content="website">
 <title>INSO — 陈振邦 / AI Agent 与应用开发</title>
 <script>
+document.documentElement.classList.add('entry-pending');
 try {
   const remembered=localStorage.getItem('inso-signal-theme');
   if(remembered==='light-purple') document.documentElement.dataset.theme='light-purple';
 } catch (_) {}
 </script>
-<link rel="stylesheet" href="./assets/site.css?v=motion-1">
+<link rel="stylesheet" href="./assets/site.css?v=gate-1">
+<script defer src="./assets/entry.js?v=gate-1"></script>
 <script defer src="./assets/app.js?v=motion-1"></script>
-<script defer src="./assets/motion.js?v=motion-1"></script>
+<script defer src="./assets/motion.js?v=gate-1"></script>
 </head>
 <body>
+<dialog class="entry-gate" id="entry-gate" aria-labelledby="entry-title" hidden>
+  <div class="gate-panel gate-panel-tl" aria-hidden="true"></div><div class="gate-panel gate-panel-tr" aria-hidden="true"></div><div class="gate-panel gate-panel-bl" aria-hidden="true"></div><div class="gate-panel gate-panel-br" aria-hidden="true"></div>
+  <div class="gate-cross" aria-hidden="true"></div>
+  <div class="gate-label gate-label-top" aria-hidden="true"><span>INSO / PERSONAL PORTFOLIO</span><span>ACCESS / 01</span></div>
+  <div class="gate-center"><p id="entry-title">WELCOME TO</p><button id="entry-enter" class="gate-enter" type="button" aria-label="进入因索的个人主页"><span class="gate-brand">inso<span>_</span></span><span class="gate-enter-text">点击进入 <span aria-hidden="true">↗</span></span></button><p class="gate-hint">OPEN THE NEXT CHAPTER</p><button id="entry-skip" class="gate-skip" type="button">跳过开场</button></div>
+  <div class="gate-label gate-label-bottom" aria-hidden="true"><span>CHEN ZHENBANG / 因索</span><span>CLICK TO UNLOCK ↗</span></div>
+</dialog>
+<div id="site-content">
 <a class="skip-link" href="#work">跳到项目</a>
 <div class="noise" aria-hidden="true"></div>
 <header class="site-header">
@@ -47,5 +57,6 @@ try {
 <footer><a class="wordmark" href="#top">inso<span>_</span></a><span>© <span id="year">2026</span> 陈振邦 / INSO</span><a class="design-credit" href="https://github.com/AntoineW/AW-2025-Portfolio" target="_blank" rel="noopener noreferrer">MOTION STUDY ↗ AW</a><a href="#top">BACK TO TOP ↑</a></footer>
 <dialog id="project-dialog" aria-labelledby="dialog-title"><div class="dialog-bar"><span id="dialog-label">PROJECT FILE</span><button type="button" id="dialog-close" aria-label="关闭项目记录">关闭 ×</button></div><div class="dialog-scroll"><h2 id="dialog-title"></h2><article id="detail-qizhu" data-detail-body="qizhu" hidden><p class="detail-role">AI Agent 应用开发实习生 · 完整性检查模块</p><section><h3>我的工作</h3><p>负责投标完整性检查模块、合成数据评测、跨行抓值修复、涂黑与密文字段检测，以及文档定位搜索。</p></section><section><h3>让评测可以复现</h3><p>固定 seed 生成 628 条规则测试样本，配套黄金答案。定位模型从其他行抓取值导致的漏检，用行级摘录切分、确定性守卫与 prompt 规则共同约束检查过程。</p></section><section><h3>指标的范围</h3><p>缺席字段检出准确率从 24% 提升到 50%。这是特定检查任务的评测结果，检出率仍需继续提高。</p></section><section><h3>把判断带回证据</h3><p>实现像素级涂黑与密文字段检测，通过 OCR 页面索引与全库检索支持证据定位和回溯；对比 5 种 OCR 引擎完成选型。</p></section><section><h3>团队与个人的分工</h3><p>团队系统覆盖招标解析、规则生成、批量审查和报告导出，拥有 436 项单元测试。我的主要贡献是完整性检查、评测与错误修复。</p></section></article><article id="detail-keybank" data-detail-body="keybank" hidden><p class="detail-role">参与资源托管、授权、审计与多角色协作演示</p><section><h3>项目做什么</h3><p>让多智能体之间的推理资源可以托管、授权和审计，形成 P2P 推理容量银行。</p></section><section><h3>我的参与</h3><p>实现资源托管、授权与审计闭环；开发跨境贸易合规 ToB 演示系统，组织多角色智能体协作流程，配套对话检测与 Telegram Bot。</p></section><section><h3>成果与范围</h3><p>团队获得南客松 S2 agent-network 赛道一等奖。公开仓库展示项目实现与演示，成果属于团队协作。</p></section></article><article id="detail-posecare" data-detail-body="posecare" hidden><p class="detail-role">全栈开发 · 浏览器端检测与 AI 解读</p><section><h3>从图像到关键点</h3><p>使用 MediaPipe 在浏览器本地提取身体关键点，原始图像不上传。</p></section><section><h3>从关键点到体验</h3><p>结合大模型生成体态解读与穿搭指南，完成全栈 AI 演示产品，获得徽客松 S3 二等奖。</p></section><section><h3>展示范围</h3><p>项目是姿态解读与穿搭演示。原图留在本地，是图像处理流程的选择；这不代表所有衍生数据都仅在本地处理。</p></section></article><article id="detail-education" data-detail-body="education" hidden><p class="detail-role">独立完成业务设计、前后端开发与部署交付</p><section><h3>完整的业务链路</h3><p>使用 Vue 3 与 NestJS 完成全栈开发，覆盖用户、题库、考试、AI 测评、支付、后台管理等 12 个业务模块。</p></section><section><h3>外部服务与交付</h3><p>集成大模型、OCR、短信与支付等第三方服务，以 Docker 容器化并通过 CI/CD 部署。</p></section><section><h3>成果范围</h3><p>这里展示独立开发与部署交付的工作，不以用户规模、收入或商业运营数据衡量成果。</p></section></article><article id="detail-wuhan" data-detail-body="wuhan" hidden><p class="detail-role">团队队长 · 推进协作、组织方案与现场展示</p><section><h3>我的工作</h3><p>负责团队推进与方案组织，把陌生赛道的问题转成可理解的产品场景，协调原型与现场展示。</p></section><section><h3>原型与成果</h3><p>围绕链上异动、资产风险和 Agent 决策展示搭建演示原型。团队获得冠军，部分技术方案仍处于概念验证阶段。</p></section><section><h3>后续状态</h3><p>赛后收到进一步投资交流意向，尚未完成融资。项目当前以演示原型为主。</p></section></article><a id="dialog-source" class="dialog-source" target="_blank" rel="noopener noreferrer" hidden>查看项目仓库 ↗</a></div></dialog>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</div>
 </body>
 </html>

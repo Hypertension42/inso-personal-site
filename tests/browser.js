@@ -6,8 +6,14 @@ const task = await taskSpace(spaceId);
 const { pathToFileURL } = await import('node:url');
 const pageUrl = globalThis.SITE_URL;
 const page = task.page('p1');
+async function dismissEntry() {
+  await page.waitForFunction(()=>document.querySelector('#entry-gate').open);
+  await page.click('#entry-skip');
+  await page.waitForFunction(()=>!document.querySelector('#entry-gate').open);
+}
 await page.goto(pageUrl);
 await page.waitForFunction(()=>document.documentElement.classList.contains('js'));
+await dismissEntry();
 await page.evaluate(()=>{ window.testErrors=[]; addEventListener('error',event=>window.testErrors.push(event.message)); });
 for (const id of ['qizhu','keybank','posecare','education','wuhan']) {
   await page.click('#tab-'+id);
@@ -37,6 +43,7 @@ for(const theme of ['purple','light-purple']) {
   }
 }
 await page.reload();await page.waitForFunction(()=>document.documentElement.classList.contains('js'));
+await dismissEntry();
 assert.equal(await page.evaluate(()=>document.documentElement.dataset.theme),'light-purple','Theme preference persists');
 await page.click('#copy-email');assert(await page.evaluate(()=>document.querySelector('#toast').classList.contains('show')));
 assert.equal(await page.evaluate(()=>getComputedStyle(document.querySelector('#toast')).color),'rgb(255, 255, 255)','Light toast has readable text');
@@ -48,5 +55,6 @@ const snapshot=await page.snapshot({scope:'full_page'});
 for(const name of ['AI 投标合规审查','Key Bank','PoseCare','T2 Education','StartLux']) assert(snapshot.includes(name),'No-JS content '+name);
 await page.cdp('Emulation.setScriptExecutionDisabled',{value:false});await page.reload();
 await page.waitForFunction(()=>document.documentElement.classList.contains('js'));
+await dismissEntry();
 if(await page.evaluate(()=>document.documentElement.dataset.theme)!=='purple') await page.click('#theme-toggle');
 console.log('PASS: all projects, dialog sources, Escape/focus, keyboard wrapping, 10 theme/viewport combinations, theme persistence, clipboard feedback, reduced motion, no-JS content.');

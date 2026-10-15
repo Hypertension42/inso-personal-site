@@ -29,3 +29,31 @@ dialog{width:min(690px,calc(100% - 32px));max-height:85dvh;padding:0;border:1px 
 .signal-art{animation:none}
 /* Allow italic overhang between reels while retaining the vertical reveal mask. */
 .hero-type>.glyph-reel{overflow:visible;clip-path:inset(0 -.12em)}
+/* Full-screen, symmetric cyberpunk entrance. */
+html.entry-pending,html.entry-active{overflow:hidden;background:#25103e}
+html.entry-pending #site-content{visibility:hidden}
+#entry-gate{--gate-fill:#25103e;--gate-line:#9a62cc;position:fixed;inset:0;width:100%;height:100dvh;max-width:none;max-height:none;border:0;margin:0;padding:0;background:transparent;color:#efe2ff;overflow:hidden;box-shadow:none;isolation:isolate}
+#entry-gate::backdrop{background:transparent;backdrop-filter:none}
+html.entry-pending #entry-gate[hidden]{display:block!important}
+.gate-panel{position:absolute;width:50.05%;height:50.05%;background:var(--gate-fill);z-index:0;will-change:transform}
+.gate-panel-tl{left:0;top:0;border-right:1px solid #a170bf28;border-bottom:1px solid #a170bf28}
+.gate-panel-tr{right:0;top:0;border-left:1px solid #a170bf28;border-bottom:1px solid #a170bf28}
+.gate-panel-bl{left:0;bottom:0;border-right:1px solid #a170bf28;border-top:1px solid #a170bf28}
+.gate-panel-br{right:0;bottom:0;border-left:1px solid #a170bf28;border-top:1px solid #a170bf28}
+.gate-panel:after{content:'';position:absolute;inset:14px;border:1px solid transparent;transition:border-color .18s}
+.is-opening .gate-panel:after{border-color:#c48afc66}
+.gate-cross{position:absolute;z-index:1;inset:0;pointer-events:none;opacity:0;transition:opacity .15s}
+.gate-cross:before,.gate-cross:after{content:'';position:absolute;left:50%;top:50%;background:#d6a1ff;box-shadow:0 0 16px #cc8eff,0 0 35px #a854f5;transform:translate(-50%,-50%)}
+.gate-cross:before{width:100%;height:1px}.gate-cross:after{width:1px;height:100%}
+.is-opening .gate-cross{animation:gateCross .6s ease-out both}
+@keyframes gateCross{0%{opacity:0;clip-path:inset(46% 46%)}30%{opacity:.9}100%{opacity:0;clip-path:inset(0)}}
+.gate-center{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:25px;pointer-events:none}
+.gate-center>p{font:9px var(--mono);letter-spacing:.25em;color:#c8a9e6;margin:0 0 22px}
+.gate-enter{pointer-events:auto;width:230px;min-height:142px;position:relative;border:1px solid #ac7bd1;background:var(--gate-fill);color:#efe2ff;padding:23px 30px;display:flex;flex-direction:column;align-items:center;gap:22px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));transition:background .2s,border-color .2s}
+.gate-enter:hover,.gate-enter:focus-visible{background:#32154f;border-color:#e1b9ff;outline-color:#e1b9ff;box-shadow:inset 0 0 30px #9353d51a}
+.gate-brand{font:700 italic 52px/1 Arial,sans-serif;letter-spacing:-3px}.gate-brand>span{color:#c393ff}.gate-enter-text{display:flex;align-items:center;gap:45px;font:12px var(--sans);letter-spacing:.12em}.gate-enter-text>span{font-size:18px;color:#d4b0ff}
+.gate-center>.gate-hint{font-size:8px;letter-spacing:.17em;margin:23px 0 0;color:#b593d0}
+.gate-skip{pointer-events:auto;border:0;background:transparent;color:#bfa0d5;padding:14px;font-size:11px;margin-top:20px;min-height:44px}.gate-skip:hover{color:#fff;text-decoration:underline}
+.gate-label{position:absolute;left:35px;right:35px;z-index:2;display:flex;justify-content:space-between;gap:18px;font:8px var(--mono);letter-spacing:.08em;color:#b593d0;pointer-events:none}.gate-label-top{top:29px}.gate-label-bottom{bottom:29px}
+@media(max-width:520px){.gate-enter{width:205px;min-height:132px}.gate-brand{font-size:46px}.gate-label{left:20px;right:20px;font-size:6px;letter-spacing:0}.gate-label-top{top:24px}.gate-label-bottom{bottom:24px}.gate-center>p{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.gate-panel{will-change:auto}.is-opening .gate-cross{animation:none!important}}

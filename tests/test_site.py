@@ -60,6 +60,13 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(html.count('class="glyph-reel"'), 4)
         self.assertIn('<h1 id="hero-title">陈振邦', html)
         self.assertIn('class="wave-field" aria-hidden="true"', html)
+    def test_entry_is_optional_without_javascript(self):
+        html = (ROOT / 'index.html').read_text()
+        self.assertIn('<dialog class="entry-gate" id="entry-gate" aria-labelledby="entry-title" hidden>', html)
+        for control in ('entry-enter', 'entry-skip', 'site-content'):
+            self.assertIn(control, self.page.ids)
+        self.assertEqual(html.count('class="gate-panel gate-panel-'), 4)
+        self.assertNotIn('id="site-content" inert', html)
     def test_project_controls_and_facts(self):
         html = (ROOT / 'index.html').read_text()
         for project in ('qizhu', 'keybank', 'posecare', 'education', 'wuhan'):

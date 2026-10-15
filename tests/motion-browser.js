@@ -5,6 +5,8 @@ const task=await taskSpace(Number(globalThis.EGO_SPACE_ID));
 const page=task.page('p1');
 await page.cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'no-preference'}]});
 await page.goto(globalThis.SITE_URL);
+await page.waitForFunction(()=>document.querySelector('#entry-gate').open);
+await page.click('#entry-skip');
 await page.cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
 await page.waitForFunction(()=>window.insoMotion?.debug().frames>5 && window.insoMotion.debug().pathCount>=25);
 assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('motion-active')),true);
