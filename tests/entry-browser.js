@@ -25,12 +25,24 @@ await reduced('no-preference');
 await page.cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
 await load();
 assert.deepEqual(await page.evaluate(()=>({inert:document.querySelector('#site-content').inert,focus:document.activeElement.id,frames:insoMotion.debug().frames})),{inert:true,focus:'entry-enter',frames:0});
+assert.equal(await page.evaluate(()=>document.querySelector('#entry-progress').getAttribute('aria-valuenow')),'0');
 await page.press('#entry-enter','Tab');
 assert.equal(await page.evaluate(()=>document.activeElement.id),'entry-skip');
 await page.keyboard.press('Tab');
 assert(await page.evaluate(()=>!document.activeElement.closest('#site-content')),'Tab stays within modal');
 await page.focus('#entry-enter');
+await page.evaluate(()=>{
+  window.progressHistory=[];
+  new MutationObserver(()=>window.progressHistory.push(Number(document.querySelector('#entry-progress').getAttribute('aria-valuenow')))).observe(document.querySelector('#entry-progress'),{attributes:true,attributeFilter:['aria-valuenow']});
+});
 await page.press('#entry-enter','Enter');
+await page.waitForFunction(()=>Number(document.querySelector('#entry-progress').getAttribute('aria-valuenow'))>0);
+assert(await page.evaluate(()=>document.querySelector('#entry-gate').classList.contains('is-charging') && document.querySelector('#entry-enter').disabled),'Click starts sequence');
+assert.equal(await page.evaluate(()=>document.querySelector('.gate-panel').getAnimations().length),0,'Door waits for progress');
+await page.waitForFunction(()=>document.querySelector('#entry-gate').classList.contains('is-opening'));
+const progressHistory=await page.evaluate(()=>window.progressHistory);
+assert(progressHistory.length>1 && progressHistory.at(-1)===100,'Progress completes before opening');
+assert(progressHistory.every((value,index)=>value>=0 && value<=100 && (!index || value>=progressHistory[index-1])),'Progress is bounded and monotonic');
 await page.evaluate(()=>{
   // Repeated activation must leave exactly one animation per panel.
   document.querySelector('#entry-enter').dispatchEvent(new Event('click'));
@@ -56,9 +68,16 @@ await page.waitForFunction(()=>insoMotion.debug().frames>5);
 await load();await page.click('#entry-skip');await opened('skip');
 assert.equal(await page.evaluate(()=>document.getAnimations().some(animation=>animation.effect?.target?.hasAttribute('data-track') && animation.effect.getTiming().duration===1050)),false,'Skip omits glyph entrance');
 await load();await page.press('#entry-enter','Escape');await opened('skip');
+await load();await page.click('#entry-enter');await page.click('#entry-skip');await opened('skip');
+const skippedProgress=await page.evaluate(()=>document.querySelector('#entry-progress').getAttribute('aria-valuenow'));
+await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+assert.equal(await page.evaluate(()=>document.querySelector('#entry-progress').getAttribute('aria-valuenow')),skippedProgress,'Skip cancels progress updates');
 await reduced('reduce');await load();await page.click('#entry-enter');await opened('skip');
 assert.equal(await page.evaluate(()=>document.querySelector('.gate-panel').getAnimations().length),0);
 await reduced('no-preference');await load();await page.click('#entry-enter');
+await reduced('reduce');await opened('skip');
+await reduced('no-preference');await load();await page.click('#entry-enter');
+await page.waitForFunction(()=>document.querySelector('#entry-gate').classList.contains('is-opening'));
 await reduced('reduce');await opened('skip');
 await reduced('no-preference');await load('#work');await page.click('#entry-skip');await opened('skip','work');
 assert(await page.evaluate(()=>Math.abs(document.querySelector('#work').getBoundingClientRect().top)<150),'Deep link is restored');
@@ -72,4 +91,4 @@ for(const width of [320,390]){
   await page.click('#entry-enter');await opened('enter');
 }
 await page.cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
-console.log('PASS: modal/focus, paused background, symmetric four-panel opening, repeated activation, keyboard entry, skip/Escape, reduced-motion before/during entry, deep link and mobile entrance.');
+console.log('PASS: monotonic 000→100% progress before opening, cancellation, modal/focus, paused background, symmetric four-panel opening, repeated activation, keyboard entry, skip/Escape, reduced-motion before/during progress and opening, deep link and mobile entrance.');
