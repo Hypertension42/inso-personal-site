@@ -45,9 +45,25 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn('纵横家', hero)
         self.assertNotIn('STRATEGIST', html)
         self.assertIn('“纵横家”是我给自己的一个提醒', html)
-    def test_static_resources_are_self_contained(self):
-        self.assertFalse([r for r in self.page.resources if r])
+    def test_static_resources_are_local_and_exist(self):
+        for resource in self.page.resources:
+            if resource:
+                self.assertFalse(resource.startswith(('http:', 'https:', '//')))
+                self.assertTrue((ROOT / resource).is_file(), resource)
         self.assertTrue((ROOT / '.nojekyll').is_file())
+        self.assertFalse((ROOT / 'assets/vendor').exists(), 'No 3D dependencies')
+    def test_project_controls_and_facts(self):
+        html = (ROOT / 'index.html').read_text()
+        for project in ('qizhu', 'keybank', 'posecare', 'education', 'wuhan'):
+            self.assertIn('tab-' + project, self.page.ids)
+            self.assertIn('panel-' + project, self.page.ids)
+            self.assertIn('detail-' + project, self.page.ids)
+        self.assertIn('缺席字段检出准确率', html)
+        self.assertIn('团队系统覆盖', html)
+        self.assertIn('436', html)
+        self.assertIn('尚未完成融资', html)
+        self.assertNotIn('<canvas', html)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -10,12 +10,11 @@ function boot(saved, blocked = false) {
   vm.runInNewContext(bootstrap, {document, localStorage: {getItem() {if(blocked) throw new Error('blocked'); return saved;}}});
   return document.documentElement.dataset.theme;
 }
-assert.equal(boot(null), 'light-purple', 'First visit defaults to white-purple');
-assert.equal(boot('unknown'), 'light-purple', 'Invalid preference uses default');
-assert.equal(boot(null, true), 'light-purple', 'Blocked storage uses default');
+assert.equal(boot(null), 'purple', 'First visit defaults to dark-purple');
+assert.equal(boot('unknown'), 'purple', 'Invalid preference uses default');
+assert.equal(boot(null, true), 'purple', 'Blocked storage uses default');
 assert.equal(boot('purple'), 'purple', 'Explicit dark choice is retained');
 assert.equal(boot('light-purple'), 'light-purple');
-assert.equal(boot('mono-dark'), 'purple');
-assert.equal(boot('mono-light'), 'light-purple');
-assert(html.includes('<meta name="theme-color" content="#fffefc">'));
-console.log('PASS: default light theme, stored preferences and blocked storage');
+assert.equal(boot('mono-light'), 'purple', 'Unrecognized old theme is not a new preference');
+assert(html.includes('<meta name="theme-color" content="#090611">'));
+console.log('PASS: default dark theme, stored preferences and blocked storage');
