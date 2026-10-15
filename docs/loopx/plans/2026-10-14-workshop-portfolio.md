@@ -9,7 +9,7 @@ slices:
     status: done
     depends: [P-001]
   - id: P-003
-    status: in_progress
+    status: done
     depends: [P-002]
 ---
 # Inso / Purple Signal
@@ -49,3 +49,7 @@ Publish the reviewed result to the existing repository. Check the deployment suc
 - Blockers: none.
 - Residual risks: GitHub Pages mainland access varies by network.
 - Resume note: 3D work stopped by user; unused dependency artifacts preserved under /tmp/inso-abandoned-3d and excluded from publication. Root owns HTML/CSS/JS/tests; content agent supplied factual module; researcher supplies final review.
+
+## Completion Evidence
+
+2026-10-15: five Python checks and Node theme cases passed; browser checks passed all project panels, source links, Escape/focus, keyboard wrap, two themes at five widths, reduced motion and no-JS summaries. Independent review finding for light-theme toast contrast was fixed and rechecked. Pages run 38661516836 succeeded; live HTML/CSS/JS/SVG returned HTTP 200 and matched local bytes. Live browser rendered the new dark design and switched projects correctly.
