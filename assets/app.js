@@ -27,6 +27,7 @@ function selectProject(id, focus = false) {
     panel.classList.toggle('active', active);
     panel.hidden = !active;
   });
+  document.dispatchEvent(new CustomEvent('inso:project-change', { detail: { id } }));
   if (focus) {
     target.focus({ preventScroll: true });
     target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });

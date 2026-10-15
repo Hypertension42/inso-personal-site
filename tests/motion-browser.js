@@ -1,0 +1,47 @@
+// EGO_SPACE_ID=<active space> ego-browser nodejs < tests/motion-browser.js
+const assert = (await import('node:assert/strict')).default;
+const {pathToFileURL} = await import('node:url');
+const task=await taskSpace(Number(globalThis.EGO_SPACE_ID));
+const page=task.page('p1');
+await page.cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'no-preference'}]});
+await page.goto(globalThis.SITE_URL);
+await page.cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+await page.waitForFunction(()=>window.insoMotion?.debug().frames>5 && window.insoMotion.debug().pathCount>=25);
+assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('motion-active')),true);
+assert(await page.evaluate(()=>document.querySelectorAll('.wave-field path').length<=60));
+const pathBefore=await page.evaluate(()=>document.querySelector('.wave-field path:nth-child(25)').getAttribute('d'));
+const bounds=await page.evaluate(()=>{const r=document.querySelector('.hero-stage').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};});
+await page.mouse.move(bounds.x-100,bounds.y-40);await page.mouse.move(bounds.x+100,bounds.y+30);
+await page.waitForFunction(before=>document.querySelector('.wave-field path:nth-child(25)').getAttribute('d')!==before,pathBefore);
+await page.click('#replay-intro');
+assert(await page.evaluate(()=>document.getAnimations().some(a=>a.effect?.target?.hasAttribute('data-track'))),'Replay animates glyph reels');
+await page.click('#motion-toggle');
+assert.equal(await page.evaluate(()=>insoMotion.isRunning()),false);
+const stopped=await page.evaluate(()=>insoMotion.debug().frames);
+await page.evaluate(()=>new Promise(resolve=>setTimeout(resolve,130)));
+assert.equal(await page.evaluate(()=>insoMotion.debug().frames),stopped,'Off freezes wave frames');
+assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('motion-active')),false);
+assert.equal(await page.evaluate(()=>getComputedStyle(document.querySelector('.signal-art')).animationName),'none');
+await page.click('#motion-toggle');await page.waitForFunction(()=>insoMotion.isRunning());
+await page.evaluate(()=>document.querySelector('#work').scrollIntoView({behavior:'instant'}));
+await page.waitForFunction(()=>!insoMotion.isRunning());
+for(const id of ['education','wuhan','keybank','posecare','qizhu']) await page.click('#tab-'+id);
+assert.equal(await page.evaluate(()=>document.querySelector('[data-panel]:not([hidden])').dataset.panel),'qizhu');
+await page.evaluate(()=>document.querySelector('#contact').scrollIntoView({behavior:'instant'}));
+await page.focus('.contact-arrow');
+await page.waitForFunction(()=>document.querySelector('.contact-section').classList.contains('is-pulsing'));
+await page.cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
+await page.waitForFunction(()=>matchMedia('(prefers-reduced-motion: reduce)').matches && !insoMotion.debug().enabled);
+assert.equal(await page.evaluate(()=>insoMotion.isRunning()),false);
+assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('motion-active')),false);
+assert.equal(await page.evaluate(()=>document.querySelector('#replay-intro').disabled),true);
+assert.equal(await page.evaluate(()=>document.querySelector('.contact-section').classList.contains('is-pulsing')),false);
+await page.cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'no-preference'}]});
+await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.waitForFunction(()=>insoMotion.isRunning());
+for(const width of [320,390,768,900,1440]){
+ await page.cdp('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width<800});
+ await page.waitForFunction(()=>insoMotion.debug().pathCount>0);
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No overflow '+width);
+}
+assert.equal(await page.evaluate(()=>document.querySelectorAll('.glyph-reel').length),4);
+console.log('PASS: live path changes, glyph replay, pause freezing, offscreen pause, fast project switching, contact focus ripple, reduced-motion and five viewport widths.');

@@ -1,10 +1,10 @@
 // Run with ego-browser nodejs; reuses this task's browser space.
 const assert = (await import('node:assert/strict')).default;
-const spaceId = Number(process.env.EGO_SPACE_ID);
+const spaceId = Number(globalThis.EGO_SPACE_ID);
 assert(Number.isInteger(spaceId) && spaceId > 0, 'Set EGO_SPACE_ID to an active ego-browser task space');
 const task = await taskSpace(spaceId);
 const { pathToFileURL } = await import('node:url');
-const pageUrl = pathToFileURL(process.cwd() + '/index.html').href;
+const pageUrl = globalThis.SITE_URL;
 const page = task.page('p1');
 await page.goto(pageUrl);
 await page.waitForFunction(()=>document.documentElement.classList.contains('js'));

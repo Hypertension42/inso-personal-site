@@ -52,6 +52,13 @@ class SiteTests(unittest.TestCase):
                 self.assertTrue((ROOT / resource).is_file(), resource)
         self.assertTrue((ROOT / '.nojekyll').is_file())
         self.assertFalse((ROOT / 'assets/vendor').exists(), 'No 3D dependencies')
+    def test_motion_controls_and_accessible_title(self):
+        html = (ROOT / 'index.html').read_text()
+        for control in ('motion-toggle', 'replay-intro'):
+            self.assertIn(control, self.page.ids)
+        self.assertEqual(html.count('class="glyph-reel"'), 4)
+        self.assertIn('<h1 id="hero-title">陈振邦', html)
+        self.assertIn('class="wave-field" aria-hidden="true"', html)
     def test_project_controls_and_facts(self):
         html = (ROOT / 'index.html').read_text()
         for project in ('qizhu', 'keybank', 'posecare', 'education', 'wuhan'):
